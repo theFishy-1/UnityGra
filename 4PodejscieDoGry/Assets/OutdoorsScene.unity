@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1329.1367, g: 1393.1035, b: 2022.7031, a: 1}
+  m_IndirectSpecularColor: {r: 1329.6348, g: 1393.5645, b: 2023.1562, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1181,6 +1181,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeedcf73a2d5ffe42bfd7b59b9f3a561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 5
+  mouseSensitivity: 3.5
+  lockCursor: 1
+  playerCamera: {fileID: 1957565480}
 --- !u!143 &1252939338
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1196,7 +1200,7 @@ CharacterController:
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.05
+  m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1321844877
