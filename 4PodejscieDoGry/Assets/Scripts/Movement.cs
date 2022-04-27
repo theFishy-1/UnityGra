@@ -5,11 +5,11 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     public float speed = 5;
-    float jumpSpeed = 10;
-    float gravity = -0.25f;
+    public float jumpSpeed = 15;
+    public float gravity = -0.25f;
     float speedMulti = 10;
     float speedDiv = 2;
-    [SerializeField] float mouseSensitivity = 3.5f;
+    public float mouseSensitivity = 3.5f;
     float cameraPitch = 0.0f;
     [SerializeField] bool lockCursor = true;
 
@@ -54,7 +54,7 @@ public class Movement : MonoBehaviour
         //Vector2 dir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         //dir.Normalize();
         velocity.x = Input.GetAxisRaw("Horizontal") * speed;
-        velocity.z = Input.GetAxisRaw("Vertical") * speed;
+        velocity.z = Input.GetAxisRaw("Vertical") * speed;       
 
         //------------------------------JUMP------------------------------//
         if (Input.GetButtonDown("Jump") && groundedPlayer)
@@ -84,7 +84,7 @@ public class Movement : MonoBehaviour
         }
 
         //--------------------------PORUSZANIE GRACZA---------------------//
-        velocity = new Vector3(velocity.x, velocity.y, velocity.z);
-        cc.Move(velocity * Time.deltaTime);
+        velocity = new Vector3(velocity.x, velocity.y, velocity.z);       
+        cc.Move(transform.rotation * velocity * Time.deltaTime);       
     }
 }
