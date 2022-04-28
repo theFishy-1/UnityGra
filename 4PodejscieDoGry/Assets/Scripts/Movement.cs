@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    public float speed = 5;
-    public float jumpSpeed = 15;
+    public float speed = 7;
+    public float jumpSpeed = 10;
     public float gravity = -0.25f;
     float speedMulti = 10;
     float speedDiv = 2;
