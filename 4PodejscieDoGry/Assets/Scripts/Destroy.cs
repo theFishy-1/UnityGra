@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class Destroy : MonoBehaviour
 {
-    void OnCollisionEnter(Collision other)
+    public float health = 60f;
+
+
+    public void TakeDamage(int damage)
     {
-        if (other.gameObject.tag == "Enemy")
+        health -= damage;
+        if (health <= 0f)
         {
-            Destroy(other.gameObject);
+            Death();
         }
-        //else
-        //{
-        //    Destroy(gameObject);
-        //}
+    }
+
+    void Death()
+    {
+        Destroy(gameObject);
     }
 }

@@ -7,11 +7,11 @@ public class Shooting : MonoBehaviour
 {
     //Other
     public GameObject projectile;
-    public Transform Spawnpoint;
-    public float TimeToLive = 0.1f;
+    public Transform Spawnpoint;    
     public Camera cam;
     public GameObject muzzleFlash;
     public TextMeshProUGUI ammunitionDisplay;
+    public GameObject bulletHole;
 
     //Ints
     public int magAmmoCapacity;
@@ -32,7 +32,6 @@ public class Shooting : MonoBehaviour
     public Rigidbody playerRb;
     public float recoilForce;
 
-
     //Bools
     bool shooting;
     bool readyToShoot;
@@ -46,18 +45,12 @@ public class Shooting : MonoBehaviour
         readyToShoot = true;
     }
 
-    void Start()
-    {
-        
-    }
-
-
     public void Update()
     {       
         HandleShooting();
 
         if (ammunitionDisplay != null)
-            ammunitionDisplay.SetText(bulletsLeft / bulletsPerShot + " / " + magAmmoCapacity / bulletsPerShot);
+            ammunitionDisplay.SetText(bulletsLeft / bulletsPerShot + " / " + magAmmoCapacity / bulletsPerShot);        
     }
 
     void HandleShooting()
@@ -89,6 +82,9 @@ public class Shooting : MonoBehaviour
         else
             targetPoint = ray.GetPoint(75);
 
+        Quaternion spawnRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+        GameObject clone = Instantiate(bulletHole, hit.point, spawnRotation);
+
         Vector3 directionWithoutSpread = targetPoint - Spawnpoint.position;
 
         float x = Random.Range(-spreadValue, spreadValue);
@@ -119,6 +115,8 @@ public class Shooting : MonoBehaviour
 
         if (bulletsShot < bulletsPerShot && bulletsLeft > 0)
             Invoke("Shoot", timeBetweenShots);
+
+        
     }
 
     private void ResetShot()
@@ -139,6 +137,3 @@ public class Shooting : MonoBehaviour
         reloading = false;
     }
 }
-
-
-//Destroy(clone.gameObject, TimeToLive);
