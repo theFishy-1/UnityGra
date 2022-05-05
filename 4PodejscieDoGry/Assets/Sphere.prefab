@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 8566021664705265159}
   - component: {fileID: 8566021664705265156}
   - component: {fileID: 8566021664705265157}
-  - component: {fileID: 8566021664705265178}
   - component: {fileID: 8566021664705265152}
-  m_Layer: 8
+  - component: {fileID: -7513794885626081185}
+  - component: {fileID: 3378894121389483363}
+  m_Layer: 13
   m_Name: Sphere
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -65,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  - {fileID: 2100000, guid: 2173be396419a5c408947d955671b2db, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -116,31 +117,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &8566021664705265178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8566021664705265179}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c6b886d91e82f34b8061c6dd9e9780a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 8566021664705265157}
-  explosion: {fileID: 0}
-  whatIsEnemies:
-    serializedVersion: 2
-    m_Bits: 64
-  bounciness: 0
-  useGravity: 1
-  damage: 20
-  explosionRange: 3
-  explosionForce: 1000
-  maxCollisons: 1
-  maxLifetime: 4
-  explodeOnTouch: 1
 --- !u!96 &8566021664705265152
 TrailRenderer:
   serializedVersion: 2
@@ -249,3 +225,102 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &-7513794885626081185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8566021664705265179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeabba2e3dba5c54a995fd60c231ba40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activated: 1
+  rb: {fileID: 8566021664705265157}
+  explosion: {fileID: 7930570079632727659, guid: 5a823f7047f0a79488481c0a852dad61,
+    type: 3}
+  whatIsEnemies:
+    serializedVersion: 2
+    m_Bits: 2112
+  bounciness: 0.8
+  useGravity: 1
+  damage: 100
+  explosionRange: 4
+  explosionForce: 1200
+  maxCollisions: 10
+  maxLifetime: 1.25
+  explodeOnTouch: 1
+  secondBullet: {fileID: 5184713336830875871, guid: adda450acd665b84a8bcc47113966ed3,
+    type: 3}
+  sb_amount: 7
+  sb_forwardForce: 0
+  sb_upwardForce: 0
+  sb_randomForce: 10
+  scaleGrowingSpeed: 0
+  damageGrowingSpeed: 0
+  maxScale: 0
+  maxDamage: 0
+  stickToObjects: 0
+  checkForEnemies: 0
+  checkRange: 0
+  objectToSpawn: {fileID: 0}
+  timeBetweenSpawns: 0
+  preferredSpawnPoints: []
+  maxSpawnAmount: 0
+  nameOfObjectToTp: 
+  tpOnFirstCollision: 0
+  tpOnEveryCollision: 0
+  tpOnExplosion: 0
+  switchPlaces: 0
+  timeBeforeVanish: 0
+  timeBetweenVanishAndAppear: 0
+  dontAppearAgain: 0
+  canStillExplodeWhenVanished: 0
+  canTravelThroughtWallsWhileVanished: 0
+  repeat: 0
+  useSmoothAutoAim: 0
+  useInsaneAutoAim: 0
+  autoAimIntensity: 0
+  autoAimDetectRange: 0
+  autoAimStopRange: 0
+  timeBeforeDropping: 0
+  waitMidAir: 0
+  dropForce: 0
+  explodeDirectlyAfterDrop: 1
+  smokeEffect: {fileID: 0}
+  useCustomGravity: 0
+  gravityDirection: {x: 0, y: 0, z: 0}
+  gravityStrength: 0
+  playerObjectName: 
+  dashForce: 0
+  dashDelay: 0.2
+  chargeTime: 0
+  chargedVelocityMultiplier: 0
+  alreadyExploded: 0
+--- !u!114 &3378894121389483363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8566021664705265179}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c6b886d91e82f34b8061c6dd9e9780a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 8566021664705265157}
+  explosion: {fileID: 0}
+  whatIsEnemies:
+    serializedVersion: 2
+    m_Bits: 64
+  bounciness: 0
+  useGravity: 0
+  damage: 60
+  explosionRange: 0.4
+  explosionForce: 0
+  maxCollisons: 0
+  maxLifetime: 4
+  explodeOnTouch: 1

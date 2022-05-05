@@ -29,7 +29,7 @@ public class Shooting : MonoBehaviour
     //Recoil & Spread
     public float upwardForce;
     public float spreadValue;
-    public Rigidbody playerRb;
+    //public Rigidbody playerRb;
     public float recoilForce;
 
     //Bools
@@ -78,12 +78,26 @@ public class Shooting : MonoBehaviour
 
         Vector3 targetPoint;
         if (Physics.Raycast(ray, out hit))
+        {
             targetPoint = hit.point;
-        else
-            targetPoint = ray.GetPoint(75);
 
-        Quaternion spawnRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
-        GameObject clone = Instantiate(bulletHole, hit.point, spawnRotation);
+            if (hit.collider.tag == "Bullet")
+            {
+                print("Bullet hit a bullet!");
+            }
+            else
+            {
+                GameObject obj = Instantiate(bulletHole, hit.point, Quaternion.LookRotation(hit.normal));
+                obj.transform.position += Quaternion.LookRotation(hit.normal) * obj.transform.forward / 1000;
+            }
+        }
+        else
+        {
+            targetPoint = ray.GetPoint(75);
+        }
+
+        //Quaternion spawnRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+        
 
         Vector3 directionWithoutSpread = targetPoint - Spawnpoint.position;
 
@@ -110,14 +124,14 @@ public class Shooting : MonoBehaviour
             Invoke("ResetShot", timeBetweenShooting);
             allowInvoke = false;
 
-            playerRb.AddForce(-directionWithSpread.normalized * recoilForce, ForceMode.Impulse);
+            //playerRb.AddForce(-directionWithSpread.normalized * recoilForce, ForceMode.Impulse);
         }
 
         if (bulletsShot < bulletsPerShot && bulletsLeft > 0)
             Invoke("Shoot", timeBetweenShots);
 
         
-    }
+    }   
 
     private void ResetShot()
     {

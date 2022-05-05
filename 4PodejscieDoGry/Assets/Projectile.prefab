@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 6504524065503526731}
   - component: {fileID: 6504524065503526733}
   - component: {fileID: 6504524065503526730}
-  - component: {fileID: -2955074890372951285}
-  m_Layer: 8
+  - component: {fileID: 6650495351860926125}
+  - component: {fileID: -5643026379272015943}
+  m_Layer: 13
   m_Name: Projectile
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -115,7 +116,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &-2955074890372951285
+--- !u!114 &6650495351860926125
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,6 +125,175 @@ MonoBehaviour:
   m_GameObject: {fileID: 6504524065503526723}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9af107152d343e4089b345439564a5d, type: 3}
+  m_Script: {fileID: 11500000, guid: eeabba2e3dba5c54a995fd60c231ba40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activated: 1
+  rb: {fileID: 6504524065503526730}
+  explosion: {fileID: 4537435946614173864, guid: b100d472899067848b58c6df217e156d,
+    type: 3}
+  whatIsEnemies:
+    serializedVersion: 2
+    m_Bits: 2048
+  bounciness: 1
+  useGravity: 0
+  damage: 60
+  explosionRange: 0.4
+  explosionForce: 0
+  maxCollisions: 1
+  maxLifetime: 6
+  explodeOnTouch: 1
+  secondBullet: {fileID: 0}
+  sb_amount: 0
+  sb_forwardForce: 0
+  sb_upwardForce: 0
+  sb_randomForce: 0
+  scaleGrowingSpeed: 0
+  damageGrowingSpeed: 0
+  maxScale: 0
+  maxDamage: 0
+  stickToObjects: 0
+  checkForEnemies: 0
+  checkRange: 0
+  objectToSpawn: {fileID: 0}
+  timeBetweenSpawns: 0
+  preferredSpawnPoints: []
+  maxSpawnAmount: 0
+  nameOfObjectToTp: 
+  tpOnFirstCollision: 0
+  tpOnEveryCollision: 0
+  tpOnExplosion: 0
+  switchPlaces: 0
+  timeBeforeVanish: 0
+  timeBetweenVanishAndAppear: 0
+  dontAppearAgain: 0
+  canStillExplodeWhenVanished: 0
+  canTravelThroughtWallsWhileVanished: 0
+  repeat: 0
+  useSmoothAutoAim: 0
+  useInsaneAutoAim: 0
+  autoAimIntensity: 0
+  autoAimDetectRange: 0
+  autoAimStopRange: 0
+  timeBeforeDropping: 0
+  waitMidAir: 0
+  dropForce: 0
+  explodeDirectlyAfterDrop: 1
+  smokeEffect: {fileID: 0}
+  useCustomGravity: 0
+  gravityDirection: {x: 0, y: 0, z: 0}
+  gravityStrength: 0
+  playerObjectName: 
+  dashForce: 0
+  dashDelay: 0.2
+  chargeTime: 0
+  chargedVelocityMultiplier: 0
+  alreadyExploded: 0
+--- !u!96 &-5643026379272015943
+TrailRenderer:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6504524065503526723}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 257
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Time: 1
+  m_Parameters:
+    serializedVersion: 3
+    widthMultiplier: 0.7
+    widthCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1.8644506
+        outSlope: -1.8644506
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.1259259
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    colorGradient:
+      serializedVersion: 2
+      key0: {r: 1, g: 0.1840748, b: 0, a: 1}
+      key1: {r: 1, g: 0.7592709, b: 0, a: 1}
+      key2: {r: 1, g: 0.7592709, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 65535
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    numCornerVertices: 0
+    numCapVertices: 0
+    alignment: 0
+    textureMode: 0
+    shadowBias: 0.5
+    generateLightingData: 0
+  m_MinVertexDistance: 0.1
+  m_Autodestruct: 0
+  m_Emitting: 1
