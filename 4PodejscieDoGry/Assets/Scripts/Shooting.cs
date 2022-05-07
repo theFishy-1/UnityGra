@@ -5,8 +5,12 @@ using TMPro;
 
 public class Shooting : MonoBehaviour
 {
-    //Other
+    public bool shootingEnabled = true;
+
+    [Header("Attach your bullet prefab")]
     public GameObject projectile;
+
+    //Other
     public Transform Spawnpoint;    
     public Camera cam;
     public GameObject muzzleFlash;
@@ -14,11 +18,10 @@ public class Shooting : MonoBehaviour
     public GameObject bulletHole;
 
     //Ints
-    public int magAmmoCapacity;
+    
+    //public int magAmmoCapacity2;
     public int bulletsPerShot;
-
-    int bulletsLeft;
-    int bulletsShot;
+    //private int magAmmoCapacityOriginal;
 
     //Floats
     public float shootForce;
@@ -39,18 +42,25 @@ public class Shooting : MonoBehaviour
     public bool allowButtonHold;
     public bool allowInvoke = true;
 
+    int bulletsShot;
+
+    public int bulletsLeft;   
+    public int magAmmoCapacity = 10;
+    public int currentAmmo;
+    public int maxAmmoSize = 100;
+
     private void Awake()
     {
         bulletsLeft = magAmmoCapacity;
         readyToShoot = true;
+        //magAmmoCapacityOriginal = magAmmoCapacity;       
     }
 
     public void Update()
     {       
         HandleShooting();
-
-        if (ammunitionDisplay != null)
-            ammunitionDisplay.SetText(bulletsLeft / bulletsPerShot + " / " + magAmmoCapacity / bulletsPerShot);        
+        
+        ammunitionDisplay.SetText(bulletsLeft / bulletsPerShot + " / " + magAmmoCapacity / bulletsPerShot + " | " + currentAmmo / bulletsPerShot + " / " + maxAmmoSize / bulletsPerShot);        
     }
 
     void HandleShooting()
@@ -58,12 +68,11 @@ public class Shooting : MonoBehaviour
         if (allowButtonHold) shooting = Input.GetButton("Fire1");
         else shooting = Input.GetButtonDown("Fire1");
 
-        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magAmmoCapacity && !reloading) Reload();
-        if (readyToShoot && shooting && !reloading && bulletsLeft <= 0) Reload();
+        if (Input.GetKeyDown(KeyCode.R) && magAmmoCapacity > 0 && !reloading) Reload(); //bulletsLeft < magAmmoCapacity
 
         if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
         {
-            bulletsShot = 0;
+            bulletsShot = bulletsPerShot;
 
             Shoot();
         }                  
@@ -71,6 +80,8 @@ public class Shooting : MonoBehaviour
 
     private void Shoot()
     {
+        if (!shootingEnabled) return;
+
         readyToShoot = false;
 
         Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
@@ -103,34 +114,33 @@ public class Shooting : MonoBehaviour
 
         float x = Random.Range(-spreadValue, spreadValue);
         float y = Random.Range(-spreadValue, spreadValue);
+        float z = Random.Range(-spreadValue, spreadValue);
 
-        Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x, y, 0);
+        Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x, y, z);
 
         GameObject currentBullet = Instantiate(projectile, Spawnpoint.position, Quaternion.identity);
-
         currentBullet.transform.forward = directionWithSpread.normalized;
 
         currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
         currentBullet.GetComponent<Rigidbody>().AddForce(cam.transform.up * upwardForce, ForceMode.Impulse);
 
-        if (muzzleFlash != null)
-            Instantiate(muzzleFlash, Spawnpoint.position, Quaternion.identity);
+        if (currentBullet.GetComponent<CustomProjectiles>()) currentBullet.GetComponent<CustomProjectiles>().activated = true;
+
+        Instantiate(muzzleFlash, Spawnpoint.position, Quaternion.identity);
 
         bulletsLeft--;
-        bulletsShot++;
+        bulletsShot--; //bulletsShot++;
 
         if (allowInvoke)
         {
             Invoke("ResetShot", timeBetweenShooting);
             allowInvoke = false;
 
-            //playerRb.AddForce(-directionWithSpread.normalized * recoilForce, ForceMode.Impulse);
+            //playerRb.AddForce(-directionWithSpread.normalized * recoilForce, ForceMode.Impulse);            
         }
 
-        if (bulletsShot < bulletsPerShot && bulletsLeft > 0)
-            Invoke("Shoot", timeBetweenShots);
-
-        
+        if (bulletsShot > 0 && bulletsLeft > 0)  //bulletsShot < bulletsPerShot
+            Invoke("Shoot", timeBetweenShots);        
     }   
 
     private void ResetShot()
@@ -140,14 +150,63 @@ public class Shooting : MonoBehaviour
     }
 
     private void Reload()
-    {
+    {             
         reloading = true;
         Invoke("ReloadFinished", reloadTime);
     }
 
     private void ReloadFinished()
     {
-        bulletsLeft = magAmmoCapacity;
+        //magAmmoCapacityOriginal = magAmmoCapacity2;        
+        //magAmmoCapacity -= magAmmoCapacityOriginal - bulletsLeft;
+        //bulletsLeft += magAmmoCapacityOriginal - bulletsLeft;
+
+        int reloadAmount = magAmmoCapacity - bulletsLeft;
+        reloadAmount = (currentAmmo - reloadAmount) > -0 ? reloadAmount : currentAmmo;
+        bulletsLeft += reloadAmount;
+        currentAmmo -= reloadAmount;
+
         reloading = false;
     }
+
+    public void AddAmmo(int ammoAmount)
+    {
+        currentAmmo += ammoAmount;
+        if(currentAmmo > maxAmmoSize)
+        {
+            //currentAmmo = maxAmmoSize;
+        }
+    }
+
+    #region Setters
+
+    public void SetShootForce(float v)
+    {
+        shootForce = v;
+    }
+    public void SetUpwardForce(float v)
+    {
+        upwardForce = v;
+    }
+    public void SetFireRate(float v)
+    {
+        float _v = 2 / v;
+        timeBetweenShooting = _v;
+    }
+    public void SetSpread(float v)
+    {
+        spreadValue = v;
+    }
+    public void SetMagazinSize(float v)
+    {
+        int _v = Mathf.RoundToInt(v);
+        magAmmoCapacity = _v;
+    }
+    public void SetBulletsPerTap(float v)
+    {
+        int _v = Mathf.RoundToInt(v);
+        bulletsPerShot = _v;
+    }
+
+    #endregion
 }

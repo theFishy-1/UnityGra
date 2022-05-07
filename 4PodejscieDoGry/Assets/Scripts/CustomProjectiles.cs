@@ -2,15 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// Thanks for downloading my custom projectiles script! :D
-/// Feel free to use it in any project you like!
-/// 
-/// The code is fully commented but if you still have any questions
-/// don't hesitate to write a yt comment
-/// or use the #coding-problems channel of my discord server
-/// 
-/// Dave
-
 public class CustomProjectiles : MonoBehaviour
 {
     public bool activated;
@@ -29,6 +20,7 @@ public class CustomProjectiles : MonoBehaviour
     public int damage;
     public float explosionRange;
     public float explosionForce;
+    public float jumpSpeed;
 
     [Header("Lifetime:")]
     public int maxCollisions;
@@ -238,7 +230,7 @@ public class CustomProjectiles : MonoBehaviour
             Instantiate(explosion, transform.position, Quaternion.identity);
 
         //Check for enemies and damage them
-        Collider[] enemies = Physics.OverlapSphere(transform.position, explosionRange, whatIsEnemies);
+        Collider[] enemies = Physics.OverlapSphere(transform.position, explosionRange);  //whatIsEnemies
         for (int i = 0; i < enemies.Length; i++)
         {
             //Damage enemies
@@ -248,6 +240,11 @@ public class CustomProjectiles : MonoBehaviour
             //Add explosion force to enemies
             if (enemies[i].GetComponent<Rigidbody>())
                 enemies[i].GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRange, 2f);
+
+            //Add explosion force to player
+            if (enemies[i].GetComponent<Movement>())
+                enemies[i].GetComponent<Movement>().moveDirection.y = 20;
+                               
         }
 
         //Pearl(Teleport) to position
@@ -294,7 +291,7 @@ public class CustomProjectiles : MonoBehaviour
         if (isVanished && !canStillExplodeWhenVanished) return;
 
         //Colliding with other bullet doesn't count
-        ///if (collision.collider.CompareTag("Bullet")) return;
+        if (collision.collider.CompareTag("Bullet")) return;
 
         //Stick to objects, only if not already sticking and switchPlaces is turned off (bug fixing)
         if (stickToObjects && !sticking && !switchPlaces)
@@ -314,7 +311,8 @@ public class CustomProjectiles : MonoBehaviour
         if (objectToTp != null && tpOnEveryCollision) Pearl(transform.position);
 
         //Explode on touch
-        if (explodeOnTouch && collision.collider.CompareTag("Enemy")) Explode();
+        
+        if (explodeOnTouch && collision.collider.CompareTag("Enemy") && !collision.collider.CompareTag("Bullet")) Explode();
 
         //Count up collisions
         collisions++;
