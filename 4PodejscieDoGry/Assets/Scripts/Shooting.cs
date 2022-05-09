@@ -16,9 +16,10 @@ public class Shooting : MonoBehaviour
     public GameObject muzzleFlash;
     public TextMeshProUGUI ammunitionDisplay;
     public GameObject bulletHole;
-
-    //Ints
-    
+    public GameObject hitmarker;
+    public AudioSource source;
+    public AudioClip clip;
+   
     //public int magAmmoCapacity2;
     public int bulletsPerShot;
     //private int magAmmoCapacityOriginal;
@@ -53,6 +54,7 @@ public class Shooting : MonoBehaviour
     {
         bulletsLeft = magAmmoCapacity;
         readyToShoot = true;
+        hitmarker.SetActive(false);
         //magAmmoCapacityOriginal = magAmmoCapacity;       
     }
 
@@ -134,13 +136,18 @@ public class Shooting : MonoBehaviour
         if (allowInvoke)
         {
             Invoke("ResetShot", timeBetweenShooting);
-            allowInvoke = false;
-
-            //playerRb.AddForce(-directionWithSpread.normalized * recoilForce, ForceMode.Impulse);            
+            allowInvoke = false;            
         }
 
         if (bulletsShot > 0 && bulletsLeft > 0)  //bulletsShot < bulletsPerShot
-            Invoke("Shoot", timeBetweenShots);        
+            Invoke("Shoot", timeBetweenShots);  
+        
+        if (hit.collider.tag == "Enemy")
+        {
+            source.PlayOneShot(clip);
+            HitActive();            
+            Invoke("HitDisable", 0.05f);
+        }
     }   
 
     private void ResetShot()
@@ -176,6 +183,16 @@ public class Shooting : MonoBehaviour
         {
             //currentAmmo = maxAmmoSize;
         }
+    }
+
+    private void HitActive()
+    {
+        hitmarker.SetActive(true);
+    }
+
+    private void HitDisable()
+    {
+        hitmarker.SetActive(false);
     }
 
     #region Setters

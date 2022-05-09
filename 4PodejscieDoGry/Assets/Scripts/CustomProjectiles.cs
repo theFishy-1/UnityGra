@@ -10,6 +10,7 @@ public class CustomProjectiles : MonoBehaviour
     public Rigidbody rb;
     public GameObject explosion;
     public LayerMask whatIsEnemies;
+    public LayerMask whatIsPlayer;
 
     [Header("Set the basic stats:")]
     [Range(0f, 1f)]
@@ -230,7 +231,7 @@ public class CustomProjectiles : MonoBehaviour
             Instantiate(explosion, transform.position, Quaternion.identity);
 
         //Check for enemies and damage them
-        Collider[] enemies = Physics.OverlapSphere(transform.position, explosionRange);  //whatIsEnemies
+        Collider[] enemies = Physics.OverlapSphere(transform.position, explosionRange, whatIsEnemies);  //whatIsEnemies
         for (int i = 0; i < enemies.Length; i++)
         {
             //Damage enemies
@@ -243,8 +244,7 @@ public class CustomProjectiles : MonoBehaviour
 
             //Add explosion force to player
             if (enemies[i].GetComponent<Movement>())
-                enemies[i].GetComponent<Movement>().moveDirection.y = 20;
-                               
+                enemies[i].GetComponent<Movement>().moveDirection.y = 30;                
         }
 
         //Pearl(Teleport) to position

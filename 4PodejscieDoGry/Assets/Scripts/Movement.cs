@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    public float speed = 7;
-    public float jumpSpeed = 15;
+    public float speed = 15;
+    public float jumpSpeed = 20;
     public float gravity = -0.25f; //-0.25f
-    float speedMulti = 10;
+    float speedMulti = 15;
     float speedDiv = 2;
     public float mouseSensitivity = 1.5f;
     float cameraPitch = 0.0f;
@@ -68,6 +68,7 @@ public class Movement : MonoBehaviour
         {
             jumping = true;
             moveDirection.y = jumpSpeed;
+            speed = 30;
             click--;           
         }
         //------------------------------GRAVITY---------------------------//
@@ -94,7 +95,7 @@ public class Movement : MonoBehaviour
         //-----------------------RETURN TO NORMAL SPEED-------------------//
         if (!Input.GetKey("left ctrl") && groundedPlayer && !Input.GetKey("left shift"))
         {
-            speed = 5;
+            speed = 15;
         }
         //--------------------------PORUSZANIE GRACZA---------------------//
         moveDirection = new Vector3(moveDirection.x, moveDirection.y, moveDirection.z);       
@@ -102,7 +103,6 @@ public class Movement : MonoBehaviour
 
         jumping = false;
 
-        Debug.Log(moveDirection.y);
-        Debug.Log(jumping);
+        Debug.Log(moveDirection);
     }
 }

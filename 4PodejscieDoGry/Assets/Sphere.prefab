@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 8566021664705265157}
   - component: {fileID: 8566021664705265152}
   - component: {fileID: -7513794885626081185}
-  - component: {fileID: 3378894121389483363}
   m_Layer: 13
   m_Name: Sphere
   m_TagString: Bullet
@@ -244,11 +243,15 @@ MonoBehaviour:
   whatIsEnemies:
     serializedVersion: 2
     m_Bits: 2112
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 0
   bounciness: 0.8
   useGravity: 1
   damage: 100
   explosionRange: 4
   explosionForce: 1200
+  jumpSpeed: 0
   maxCollisions: 10
   maxLifetime: 1.25
   explodeOnTouch: 1
@@ -299,28 +302,3 @@ MonoBehaviour:
   chargeTime: 0
   chargedVelocityMultiplier: 0
   alreadyExploded: 0
---- !u!114 &3378894121389483363
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8566021664705265179}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c6b886d91e82f34b8061c6dd9e9780a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 8566021664705265157}
-  explosion: {fileID: 0}
-  whatIsEnemies:
-    serializedVersion: 2
-    m_Bits: 64
-  bounciness: 0
-  useGravity: 0
-  damage: 60
-  explosionRange: 0.4
-  explosionForce: 0
-  maxCollisons: 0
-  maxLifetime: 4
-  explodeOnTouch: 1

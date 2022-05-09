@@ -244,11 +244,15 @@ MonoBehaviour:
   whatIsEnemies:
     serializedVersion: 2
     m_Bits: 2048
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 0
   bounciness: 0
   useGravity: 0
-  damage: 100
-  explosionRange: 10
+  damage: 60
+  explosionRange: 5
   explosionForce: 1200
+  jumpSpeed: 0
   maxCollisions: 1
   maxLifetime: 10
   explodeOnTouch: 1
