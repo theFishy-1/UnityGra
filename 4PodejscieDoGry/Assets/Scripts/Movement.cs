@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    public float speed = 15;
-    public float jumpSpeed = 20;
-    public float gravity = -0.25f; //-0.25f
-    float speedMulti = 15;
-    float speedDiv = 2;
-    public float mouseSensitivity = 1.5f;
+    public float speed = 8; //8 not normalized
+    public float jumpSpeed = 15; //15 not normalized
+    public float gravity = -0.25f; // -0.25f not normalized
+    float speedMulti = 12; //12 not normalized
+    float speedDiv = 5;  //5 not normalized
+    public float mouseSensitivity = 0.5f;
     float cameraPitch = 0.0f;
     [SerializeField] bool lockCursor = true;
     public bool jumping = false;
@@ -58,17 +58,15 @@ public class Movement : MonoBehaviour
         //------------------------------WALKING-------------------------------\\
         groundedPlayer = cc.isGrounded;
 
-        //moveDirection = (Input.GetAxisRaw("Horizontal") * speed) + (Input.GetAxisRaw("Vertical") * speed);
         moveDirection.x = Input.GetAxisRaw("Horizontal") * speed;
         moveDirection.z = Input.GetAxisRaw("Vertical") * speed;
-
-        
+       
         //------------------------------JUMP------------------------------//
         if (Input.GetButtonDown("Jump") && click >= 1)
         {
             jumping = true;
             moveDirection.y = jumpSpeed;
-            speed = 30;
+            speed = 18;
             click--;           
         }
         //------------------------------GRAVITY---------------------------//
@@ -79,7 +77,7 @@ public class Movement : MonoBehaviour
         }
         else if (groundedPlayer && !jumping)
         {
-            moveDirection.y = -21f;
+            moveDirection.y = -0.25f;
         }
         
         //------------------------------SPRINT----------------------------//
@@ -95,11 +93,12 @@ public class Movement : MonoBehaviour
         //-----------------------RETURN TO NORMAL SPEED-------------------//
         if (!Input.GetKey("left ctrl") && groundedPlayer && !Input.GetKey("left shift"))
         {
-            speed = 15;
+            speed = 8;  //8 not normalized
         }
         //--------------------------PORUSZANIE GRACZA---------------------//
-        moveDirection = new Vector3(moveDirection.x, moveDirection.y, moveDirection.z);       
-        cc.Move(transform.rotation * moveDirection * Time.deltaTime);
+        moveDirection = new Vector3(moveDirection.x, moveDirection.y, moveDirection.z);
+        //moveDirection = Vector3.ClampMagnitude(moveDirection, speed);
+        cc.Move(transform.rotation * moveDirection * Time.deltaTime); //* Time.deltaTime);
 
         jumping = false;
 

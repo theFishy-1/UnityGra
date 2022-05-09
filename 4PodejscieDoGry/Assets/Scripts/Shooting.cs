@@ -61,7 +61,8 @@ public class Shooting : MonoBehaviour
     public void Update()
     {       
         HandleShooting();
-        
+        Aiming();
+      
         ammunitionDisplay.SetText(bulletsLeft / bulletsPerShot + " / " + magAmmoCapacity / bulletsPerShot + " | " + currentAmmo / bulletsPerShot + " / " + maxAmmoSize / bulletsPerShot);        
     }
 
@@ -149,6 +150,11 @@ public class Shooting : MonoBehaviour
             Invoke("HitDisable", 0.05f);
         }
     }   
+
+    void Aiming()
+    {
+
+    }
 
     private void ResetShot()
     {
