@@ -16,10 +16,10 @@ public class Shooting : MonoBehaviour
     public GameObject muzzleFlash;
     public TextMeshProUGUI ammunitionDisplay;
     public GameObject bulletHole;
-    public GameObject hitmarker;
     public AudioSource source;
     public AudioClip clip;
-   
+    public GameObject hitmarker;
+
     //public int magAmmoCapacity2;
     public int bulletsPerShot;
     //private int magAmmoCapacityOriginal;
@@ -49,12 +49,15 @@ public class Shooting : MonoBehaviour
     public int magAmmoCapacity = 10;
     public int currentAmmo;
     public int maxAmmoSize = 100;
+    private Vector3 savedPosition;
+    private float aimTime = 0.5f;
+    public bool spreadable;
 
     private void Awake()
     {
         bulletsLeft = magAmmoCapacity;
         readyToShoot = true;
-        hitmarker.SetActive(false);
+        
         //magAmmoCapacityOriginal = magAmmoCapacity;       
     }
 
@@ -122,6 +125,7 @@ public class Shooting : MonoBehaviour
         Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x, y, z);
 
         GameObject currentBullet = Instantiate(projectile, Spawnpoint.position, Quaternion.identity);
+
         currentBullet.transform.forward = directionWithSpread.normalized;
 
         currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
@@ -129,10 +133,15 @@ public class Shooting : MonoBehaviour
 
         if (currentBullet.GetComponent<CustomProjectiles>()) currentBullet.GetComponent<CustomProjectiles>().activated = true;
 
+        if (currentBullet.GetComponent<CustomProjectiles>()) currentBullet.GetComponent<CustomProjectiles>().hitTheTarget = true;
+            source.PlayOneShot(clip);
+            HitActive();
+            Invoke("HitDisable", 0.05f);
+
         Instantiate(muzzleFlash, Spawnpoint.position, Quaternion.identity);
 
         bulletsLeft--;
-        bulletsShot--; //bulletsShot++;
+        bulletsShot--;
 
         if (allowInvoke)
         {
@@ -140,20 +149,28 @@ public class Shooting : MonoBehaviour
             allowInvoke = false;            
         }
 
-        if (bulletsShot > 0 && bulletsLeft > 0)  //bulletsShot < bulletsPerShot
+        if (bulletsShot > 0 && bulletsLeft > 0)
             Invoke("Shoot", timeBetweenShots);  
-        
-        if (hit.collider.tag == "Enemy")
-        {
-            source.PlayOneShot(clip);
-            HitActive();            
-            Invoke("HitDisable", 0.05f);
-        }
     }   
 
     void Aiming()
     {
-
+        if (Input.GetKey(KeyCode.Mouse1))
+        {
+            gameObject.transform.localPosition = new Vector3(-0.3f, 0.2f, 0.22f); //* aimTime;
+            Camera.main.fieldOfView = 30.0f;
+            Movement.mouseSensitivity = 0.2f;
+            if (spreadable)
+                spreadValue = 0;
+        }
+        else
+        {
+            gameObject.transform.localPosition = new Vector3(0, 0, 0); //* aimTime;
+            Camera.main.fieldOfView = 60.0f;
+            Movement.mouseSensitivity = 0.5f;
+            if (spreadable)
+                spreadValue = 1;
+        }
     }
 
     private void ResetShot()
@@ -191,12 +208,12 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    private void HitActive()
+    public void HitActive()
     {
         hitmarker.SetActive(true);
     }
 
-    private void HitDisable()
+    public void HitDisable()
     {
         hitmarker.SetActive(false);
     }

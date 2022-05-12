@@ -9,7 +9,7 @@ public class Movement : MonoBehaviour
     public float gravity = -0.25f; // -0.25f not normalized
     float speedMulti = 12; //12 not normalized
     float speedDiv = 5;  //5 not normalized
-    public float mouseSensitivity = 0.5f;
+    public static float mouseSensitivity = 0.5f;
     float cameraPitch = 0.0f;
     [SerializeField] bool lockCursor = true;
     public bool jumping = false;

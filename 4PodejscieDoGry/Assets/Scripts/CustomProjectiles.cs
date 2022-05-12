@@ -11,6 +11,7 @@ public class CustomProjectiles : MonoBehaviour
     public GameObject explosion;
     public LayerMask whatIsEnemies;
     public LayerMask whatIsPlayer;
+    public bool hitTheTarget = false;
 
     [Header("Set the basic stats:")]
     [Range(0f, 1f)]
@@ -148,6 +149,8 @@ public class CustomProjectiles : MonoBehaviour
     /// as well as set some variables
     void Start()
     {
+        hitTheTarget = false;
+
         Setup();
 
         currentTimeBetweenSpawns = timeBetweenSpawns;
@@ -181,6 +184,8 @@ public class CustomProjectiles : MonoBehaviour
     /// check if a specific requirement is fullfilled and if so, call the function
     void Update()
     {
+        hitTheTarget = false;
+
         if (!activated) return;
 
         if (collisions >= maxCollisions && activated) Explode();
@@ -226,9 +231,12 @@ public class CustomProjectiles : MonoBehaviour
 
         Debug.Log("Explode");
 
+
         //Instantiate explosion if attatched
         if (explosion != null)
             Instantiate(explosion, transform.position, Quaternion.identity);
+            
+            
 
         //Check for enemies and damage them
         Collider[] enemies = Physics.OverlapSphere(transform.position, explosionRange, whatIsEnemies);  //whatIsEnemies
@@ -237,6 +245,7 @@ public class CustomProjectiles : MonoBehaviour
             //Damage enemies
             if (enemies[i].GetComponent<Destroy>())
                 enemies[i].GetComponent<Destroy>().TakeDamage(damage);
+                hitTheTarget = true;
 
             //Add explosion force to enemies
             if (enemies[i].GetComponent<Rigidbody>())
@@ -278,6 +287,7 @@ public class CustomProjectiles : MonoBehaviour
 
             sb_amount--;
         }
+
     }
     private void Delay()
     {
@@ -317,6 +327,8 @@ public class CustomProjectiles : MonoBehaviour
         //Count up collisions
         collisions++;
     }
+
+    
 
     #region Attribute functions
 

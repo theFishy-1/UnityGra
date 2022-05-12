@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class MovingRamp : MonoBehaviour
 {
-    public GameObject player;
+    public GameObject Player;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == player)
+        if (other.gameObject == Player)
         {
-            player.transform.parent = transform;
+            Player.transform.parent = transform;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject == player)
+        if (other.gameObject == Player)
         {
-            player.transform.parent = null;
+            Player.transform.parent = null;
         }
     }
 }
