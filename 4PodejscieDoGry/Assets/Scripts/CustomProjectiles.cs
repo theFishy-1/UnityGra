@@ -265,7 +265,7 @@ public class CustomProjectiles : MonoBehaviour
 
         //Invoke destruction
         GetComponent<MeshRenderer>().enabled = false;
-        GetComponent<TrailRenderer>().emitting = false;
+        GetComponent<TrailRenderer>().emitting = false;       
         Invoke("Delay", 0.08f);
 
         //Spawn second bullets and add forces (if second bullet attatched
@@ -323,6 +323,7 @@ public class CustomProjectiles : MonoBehaviour
         //Explode on touch
         
         if (explodeOnTouch && collision.collider.CompareTag("Enemy") && !collision.collider.CompareTag("Bullet")) Explode();
+        
 
         //Count up collisions
         collisions++;

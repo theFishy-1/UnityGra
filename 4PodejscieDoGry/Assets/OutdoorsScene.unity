@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1325.5264, g: 1389.8477, b: 2020.1133, a: 1}
+  m_IndirectSpecularColor: {r: 1328.3711, g: 1392.1797, b: 2021.2539, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -616,7 +616,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &76967650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -639,9 +639,9 @@ MonoBehaviour:
   ammunitionDisplay: {fileID: 1934737305}
   bulletHole: {fileID: 924385698551278738, guid: 1f53ece739cee2a49994703e13c8b67a,
     type: 3}
-  source: {fileID: 0}
-  clip: {fileID: 0}
-  hitmarker: {fileID: 0}
+  source: {fileID: 791827600}
+  clip: {fileID: 8300000, guid: 61bc517aa4ebb264ca85cd816e4a2579, type: 3}
+  hitmarker: {fileID: 1237692313}
   bulletsPerShot: 1
   shootForce: 500
   timeBetweenShots: 0.25
@@ -1605,82 +1605,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 259493420}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &261680841
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 261680842}
-  - component: {fileID: 261680844}
-  - component: {fileID: 261680843}
-  m_Layer: 5
-  m_Name: HitMarker2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &261680842
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 261680841}
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1237692314}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1.5, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &261680843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 261680841}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &261680844
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 261680841}
-  m_CullTransparentMesh: 1
 --- !u!1 &325525862
 GameObject:
   m_ObjectHideFlags: 0
@@ -5169,15 +5093,14 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 261680842}
+  m_Children: []
   m_Father: {fileID: 1170071192}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1.5, y: 30}
+  m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1237692315
 MonoBehaviour:
@@ -5199,7 +5122,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 281cdbd5a3a86204d9db6a6dde7c1adf, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6306,9 +6229,9 @@ MonoBehaviour:
   ammunitionDisplay: {fileID: 1934737305}
   bulletHole: {fileID: 924385698551278738, guid: 1f53ece739cee2a49994703e13c8b67a,
     type: 3}
-  source: {fileID: 0}
-  clip: {fileID: 0}
-  hitmarker: {fileID: 0}
+  source: {fileID: 791827600}
+  clip: {fileID: 8300000, guid: 61bc517aa4ebb264ca85cd816e4a2579, type: 3}
+  hitmarker: {fileID: 1237692313}
   bulletsPerShot: 6
   shootForce: 500
   timeBetweenShots: 0
@@ -7551,8 +7474,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 5}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1987357727
 MonoBehaviour:
@@ -7574,7 +7497,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 0b4a994bdfb894246932431cdf2840c5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7806,9 +7729,9 @@ MonoBehaviour:
   ammunitionDisplay: {fileID: 1934737305}
   bulletHole: {fileID: 2382678802749727366, guid: 3676d017e5be6e84db41b4505ea074db,
     type: 3}
-  source: {fileID: 0}
-  clip: {fileID: 0}
-  hitmarker: {fileID: 0}
+  source: {fileID: 791827600}
+  clip: {fileID: 8300000, guid: 61bc517aa4ebb264ca85cd816e4a2579, type: 3}
+  hitmarker: {fileID: 1237692313}
   bulletsPerShot: 1
   shootForce: 100
   timeBetweenShots: 0

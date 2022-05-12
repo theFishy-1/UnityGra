@@ -133,10 +133,12 @@ public class Shooting : MonoBehaviour
 
         if (currentBullet.GetComponent<CustomProjectiles>()) currentBullet.GetComponent<CustomProjectiles>().activated = true;
 
-        if (currentBullet.GetComponent<CustomProjectiles>()) currentBullet.GetComponent<CustomProjectiles>().hitTheTarget = true;
+        if (currentBullet.GetComponent<CustomProjectiles>().hitTheTarget == true)
+        {
             source.PlayOneShot(clip);
             HitActive();
             Invoke("HitDisable", 0.05f);
+        }
 
         Instantiate(muzzleFlash, Spawnpoint.position, Quaternion.identity);
 
@@ -208,12 +210,12 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    public void HitActive()
+    private void HitActive()
     {
         hitmarker.SetActive(true);
     }
 
-    public void HitDisable()
+    private void HitDisable()
     {
         hitmarker.SetActive(false);
     }
