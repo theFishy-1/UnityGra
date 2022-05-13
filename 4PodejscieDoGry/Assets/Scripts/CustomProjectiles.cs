@@ -11,7 +11,7 @@ public class CustomProjectiles : MonoBehaviour
     public GameObject explosion;
     public LayerMask whatIsEnemies;
     public LayerMask whatIsPlayer;
-    public bool hitTheTarget = false;
+    public bool hitTheTarget;
 
     [Header("Set the basic stats:")]
     [Range(0f, 1f)]
@@ -139,7 +139,6 @@ public class CustomProjectiles : MonoBehaviour
     public float chargedVelocityMultiplier;
     Vector3 savedVelocity;
 
-
     private int collisions;
 
     private PhysicMaterial physic_mat;
@@ -184,7 +183,7 @@ public class CustomProjectiles : MonoBehaviour
     /// check if a specific requirement is fullfilled and if so, call the function
     void Update()
     {
-        hitTheTarget = false;
+        
 
         if (!activated) return;
 
@@ -225,6 +224,8 @@ public class CustomProjectiles : MonoBehaviour
 
     public void Explode()
     {
+        hitTheTarget = true;
+
         //Bug fixing
         if (alreadyExploded) return;
         alreadyExploded = true;
@@ -235,8 +236,6 @@ public class CustomProjectiles : MonoBehaviour
         //Instantiate explosion if attatched
         if (explosion != null)
             Instantiate(explosion, transform.position, Quaternion.identity);
-            
-            
 
         //Check for enemies and damage them
         Collider[] enemies = Physics.OverlapSphere(transform.position, explosionRange, whatIsEnemies);  //whatIsEnemies
@@ -244,8 +243,7 @@ public class CustomProjectiles : MonoBehaviour
         {
             //Damage enemies
             if (enemies[i].GetComponent<Destroy>())
-                enemies[i].GetComponent<Destroy>().TakeDamage(damage);
-                hitTheTarget = true;
+                enemies[i].GetComponent<Destroy>().TakeDamage(damage);                
 
             //Add explosion force to enemies
             if (enemies[i].GetComponent<Rigidbody>())
@@ -327,6 +325,8 @@ public class CustomProjectiles : MonoBehaviour
 
         //Count up collisions
         collisions++;
+
+        Debug.Log(hitTheTarget);
     }
 
     
