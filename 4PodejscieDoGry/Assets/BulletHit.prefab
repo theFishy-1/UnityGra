@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 1038345326131590616}
   - component: {fileID: 1014826212633932222}
   - component: {fileID: 925382403208735651}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: BulletHit
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,9 +26,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924385698551278738}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 84.23395, y: 29.16, z: -41.454506}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 925959872225736908}
@@ -45,7 +45,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924385698551278738}
   serializedVersion: 8
-  lengthInSec: 4
+  lengthInSec: 1
   simulationSpeed: 2
   stopAction: 0
   cullingMode: 3
@@ -4748,9 +4748,9 @@ GameObject:
   - component: {fileID: 925959872225736908}
   - component: {fileID: 1038345320123289954}
   - component: {fileID: 1014826219899359436}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Light
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4778,14 +4778,14 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924385700543297684}
   serializedVersion: 8
-  lengthInSec: 4
+  lengthInSec: 1
   simulationSpeed: 2
   stopAction: 0
   cullingMode: 1
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -9630,9 +9630,9 @@ GameObject:
   - component: {fileID: 925959873423468194}
   - component: {fileID: 1038345326498401496}
   - component: {fileID: 1014826213927300252}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Fire
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9660,14 +9660,14 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924385700710836424}
   serializedVersion: 8
-  lengthInSec: 4
+  lengthInSec: 1
   simulationSpeed: 2
   stopAction: 0
   cullingMode: 3
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -9770,7 +9770,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 300
+      scalar: 10
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -14435,9 +14435,9 @@ GameObject:
   - component: {fileID: 925959873407835022}
   - component: {fileID: 1038345319251096746}
   - component: {fileID: 1014826212323722286}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Embers
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14465,14 +14465,14 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924385701416938502}
   serializedVersion: 8
-  lengthInSec: 4
+  lengthInSec: 1
   simulationSpeed: 2
   stopAction: 0
   cullingMode: 3
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0

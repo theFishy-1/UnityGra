@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 5229168110054461388}
   - component: {fileID: 5358848020314007944}
   - component: {fileID: 5357883155321030948}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: FlashHeadon
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4894,9 +4894,9 @@ GameObject:
   - component: {fileID: 5359127662716102958}
   - component: {fileID: 5357953881211325372}
   - component: {fileID: 3948856496369385430}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: MuzzleFlash01
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

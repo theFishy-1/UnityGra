@@ -20,7 +20,7 @@ GameObject:
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &6504524065503526729
 Transform:
@@ -130,18 +130,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activated: 1
   rb: {fileID: 6504524065503526730}
-  explosion: {fileID: 924385698551278738, guid: 1f53ece739cee2a49994703e13c8b67a,
-    type: 3}
+  explosion: {fileID: 0}
   whatIsEnemies:
     serializedVersion: 2
     m_Bits: 2048
   whatIsPlayer:
     serializedVersion: 2
-    m_Bits: 0
-  source: {fileID: 1276637618634219536, guid: 8357f3424abcb8f49833d94d099cef37, type: 3}
-  clip: {fileID: 8300000, guid: 61bc517aa4ebb264ca85cd816e4a2579, type: 3}
-  hitmarker: {fileID: 5130251957191273662, guid: 92f9120c2ab6e2b4a92f4462b5df41c2,
-    type: 3}
+    m_Bits: 4096
+  hitTheTarget: 0
+  rocketJumpOn: 0
   bounciness: 1
   useGravity: 0
   damage: 5

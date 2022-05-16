@@ -12,6 +12,7 @@ public class CustomProjectiles : MonoBehaviour
     public LayerMask whatIsEnemies;
     public LayerMask whatIsPlayer;
     public bool hitTheTarget;
+    public bool rocketJumpOn = false;
 
     [Header("Set the basic stats:")]
     [Range(0f, 1f)]
@@ -183,8 +184,6 @@ public class CustomProjectiles : MonoBehaviour
     /// check if a specific requirement is fullfilled and if so, call the function
     void Update()
     {
-        
-
         if (!activated) return;
 
         if (collisions >= maxCollisions && activated) Explode();
@@ -237,7 +236,7 @@ public class CustomProjectiles : MonoBehaviour
         if (explosion != null)
             Instantiate(explosion, transform.position, Quaternion.identity);
 
-        //Check for enemies and damage them
+        //Check for enemies and damage them.
         Collider[] enemies = Physics.OverlapSphere(transform.position, explosionRange, whatIsEnemies);  //whatIsEnemies
         for (int i = 0; i < enemies.Length; i++)
         {
@@ -248,10 +247,18 @@ public class CustomProjectiles : MonoBehaviour
             //Add explosion force to enemies
             if (enemies[i].GetComponent<Rigidbody>())
                 enemies[i].GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRange, 2f);
+        }
 
+        //Check for player and apply rocket jump if it is activated.
+        Collider[] enemies2 = Physics.OverlapSphere(transform.position, explosionRange, whatIsPlayer);
+        for (int i = 0; i < enemies2.Length; i++)
+        {
             //Add explosion force to player
-            if (enemies[i].GetComponent<Movement>())
-                enemies[i].GetComponent<Movement>().moveDirection.y = 30;                
+            if (rocketJumpOn == true)
+            { 
+                if (enemies2[i].GetComponent<Movement>())
+                    enemies2[i].GetComponent<Movement>().moveDirection.y = 30;
+            }
         }
 
         //Pearl(Teleport) to position

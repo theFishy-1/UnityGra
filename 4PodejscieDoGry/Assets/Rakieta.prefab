@@ -138,8 +138,9 @@ MonoBehaviour:
     m_Bits: 2048
   whatIsPlayer:
     serializedVersion: 2
-    m_Bits: 0
-  hitTheTarget: 1
+    m_Bits: 4096
+  hitTheTarget: 0
+  rocketJumpOn: 1
   bounciness: 0
   useGravity: 0
   damage: 60
