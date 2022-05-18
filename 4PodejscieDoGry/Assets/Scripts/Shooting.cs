@@ -19,6 +19,7 @@ public class Shooting : MonoBehaviour
     public AudioSource source;
     public AudioClip clip;
     public GameObject hitmarker;
+    public GameObject flash;
 
     //public int magAmmoCapacity2;
     public int bulletsPerShot;
@@ -52,6 +53,9 @@ public class Shooting : MonoBehaviour
     private Vector3 savedPosition;
     private float aimTime = 0.5f;
     public bool spreadable;
+    private bool spreadable2;
+    private bool turnedOn = false;
+    private float minimumSpreadRange = 5f;
 
     private void Awake()
     {
@@ -65,6 +69,17 @@ public class Shooting : MonoBehaviour
     {       
         HandleShooting();
         Aiming();
+
+        if(Input.GetKeyDown(KeyCode.G) && turnedOn == false)
+        {
+            FlashLight();
+            turnedOn = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.G) && turnedOn == true)
+        {
+            FlashLightOff();
+            turnedOn = false;
+        }
       
         ammunitionDisplay.SetText(bulletsLeft / bulletsPerShot + " / " + magAmmoCapacity / bulletsPerShot + " | " + currentAmmo / bulletsPerShot + " / " + maxAmmoSize / bulletsPerShot);        
     }
@@ -98,15 +113,15 @@ public class Shooting : MonoBehaviour
         {
             targetPoint = hit.point;
 
-            if (hit.collider.tag == "Bullet")
-            {
-                print("Bullet hit a bullet!");
-            }
-            else
-            {
-                GameObject obj = Instantiate(bulletHole, hit.point, Quaternion.LookRotation(hit.normal));
-                obj.transform.position += Quaternion.LookRotation(hit.normal) * obj.transform.forward / 1000;
-            }
+            //if (hit.collider.tag == "Bullet")
+            //{
+                //print("Bullet hit a bullet!");
+            //}
+            //else
+            //{
+                //GameObject obj = Instantiate(bulletHole, hit.point, Quaternion.LookRotation(hit.normal));
+                //obj.transform.position += Quaternion.LookRotation(hit.normal) * obj.transform.forward / 1000;
+            //}
         }
         else
         {
@@ -152,7 +167,19 @@ public class Shooting : MonoBehaviour
         }
 
         if (bulletsShot > 0 && bulletsLeft > 0)
-            Invoke("Shoot", timeBetweenShots);  
+            Invoke("Shoot", timeBetweenShots);
+
+        if (hit.distance <= minimumSpreadRange)
+        {
+            spreadable2 = false;
+            if (spreadable)
+                spreadValue = 0;
+            Debug.Log("Not Spreadable");
+        }
+        else if (hit.distance >= minimumSpreadRange)
+        {
+            spreadable2 = true;
+        }
     }   
 
     void Aiming()
@@ -170,7 +197,7 @@ public class Shooting : MonoBehaviour
             gameObject.transform.localPosition = new Vector3(0, 0, 0); //* aimTime;
             Camera.main.fieldOfView = 60.0f;
             Movement.mouseSensitivity = 0.5f;
-            if (spreadable)
+            if (spreadable == true && spreadable2 == true) 
                 spreadValue = 1;
         }
     }
@@ -189,10 +216,6 @@ public class Shooting : MonoBehaviour
 
     private void ReloadFinished()
     {
-        //magAmmoCapacityOriginal = magAmmoCapacity2;        
-        //magAmmoCapacity -= magAmmoCapacityOriginal - bulletsLeft;
-        //bulletsLeft += magAmmoCapacityOriginal - bulletsLeft;
-
         int reloadAmount = magAmmoCapacity - bulletsLeft;
         reloadAmount = (currentAmmo - reloadAmount) > -0 ? reloadAmount : currentAmmo;
         bulletsLeft += reloadAmount;
@@ -218,6 +241,16 @@ public class Shooting : MonoBehaviour
     private void HitDisable()
     {
         hitmarker.SetActive(false);
+    }
+
+    private void FlashLight()
+    {
+        flash.SetActive(true);
+    }
+
+    private void FlashLightOff()
+    {
+        flash.SetActive(false);
     }
 
     #region Setters

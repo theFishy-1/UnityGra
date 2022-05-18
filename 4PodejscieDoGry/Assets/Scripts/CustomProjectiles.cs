@@ -328,15 +328,24 @@ public class CustomProjectiles : MonoBehaviour
         //Explode on touch
         
         if (explodeOnTouch && collision.collider.CompareTag("Enemy") && !collision.collider.CompareTag("Bullet")) Explode();
-        
+
+        if (explosion != null)
+            Instantiate(explosion, transform.position, Quaternion.identity);            
+
+
+        if (collision.collider.CompareTag("Walls"))
+        {
+            Invoke("DestroyBullet", 0.02f);
+        }
 
         //Count up collisions
         collisions++;
-
-        Debug.Log(hitTheTarget);
     }
 
-    
+    void DestroyBullet()
+    {
+        Destroy(gameObject);
+    }
 
     #region Attribute functions
 
