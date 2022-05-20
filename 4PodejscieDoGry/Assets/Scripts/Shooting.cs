@@ -10,7 +10,7 @@ public class Shooting : MonoBehaviour
     [Header("Attach your bullet prefab")]
     public GameObject projectile;
 
-    //Other
+    [Header("Different GameObjects")]
     public Transform Spawnpoint;    
     public Camera cam;
     public GameObject muzzleFlash;
@@ -20,49 +20,55 @@ public class Shooting : MonoBehaviour
     public AudioClip clip;
     public GameObject hitmarker;
     public GameObject flash;
+    public Recoil Recoil_Script;
+    public AudioClip gunShotSound;
+    public float pitchRandomization;
+    public AudioSource sfx;
 
-    //public int magAmmoCapacity2;
-    public int bulletsPerShot;
-    //private int magAmmoCapacityOriginal;
 
-    //Floats
-    public float shootForce;
-    public float timeBetweenShots;
-    public float timeBetweenShooting;
-    public float reloadTime;
-
-    //Recoil & Spread
+    [Header("Weapon Power")]
+    public float shootForce;    
     public float upwardForce;
     public float spreadValue;
-    //public Rigidbody playerRb;
     public float recoilForce;
 
-    //Bools
+    [Header("Weapon Timing")]
+    public float reloadTime;
+    public float timeBetweenShooting; 
+    public float timeBetweenShots;
+
+    [Header("Weapon Customization")]
+    public int bulletsPerShot;
+    public bool allowButtonHold;
+    public bool spreadable;
+    
+    [Header("Debug")]  
     bool shooting;
     bool readyToShoot;
     bool reloading;
-    public bool allowButtonHold;
     public bool allowInvoke = true;
-
     int bulletsShot;
-
-    public int bulletsLeft;   
-    public int magAmmoCapacity = 10;
-    public int currentAmmo;
-    public int maxAmmoSize = 100;
+    public bool aiming;
     private Vector3 savedPosition;
-    private float aimTime = 0.5f;
-    public bool spreadable;
     private bool spreadable2;
     private bool turnedOn = false;
-    private float minimumSpreadRange = 5f;
+    private float minimumSpreadRange = 8f;
 
+    [Header("Magazine")]
+    public int bulletsLeft;   
+    public int magAmmoCapacity;
+    public int currentAmmo;
+    public int maxAmmoSize;
+      
     private void Awake()
-    {
+    {       
         bulletsLeft = magAmmoCapacity;
-        readyToShoot = true;
-        
-        //magAmmoCapacityOriginal = magAmmoCapacity;       
+        readyToShoot = true;       
+    }
+
+    public void Start() 
+    {      
+        Recoil_Script = transform.Find("cameraRecoil").GetComponent<Recoil>();
     }
 
     public void Update()
@@ -100,7 +106,7 @@ public class Shooting : MonoBehaviour
     }
 
     private void Shoot()
-    {
+    {        
         if (!shootingEnabled) return;
 
         readyToShoot = false;
@@ -125,12 +131,12 @@ public class Shooting : MonoBehaviour
         }
         else
         {
-            targetPoint = ray.GetPoint(75);
+            targetPoint = ray.GetPoint(100);
         }
+
 
         //Quaternion spawnRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
         
-
         Vector3 directionWithoutSpread = targetPoint - Spawnpoint.position;
 
         float x = Random.Range(-spreadValue, spreadValue);
@@ -148,6 +154,11 @@ public class Shooting : MonoBehaviour
 
         if (currentBullet.GetComponent<CustomProjectiles>()) currentBullet.GetComponent<CustomProjectiles>().activated = true;
 
+        //Sound
+        sfx.clip = gunShotSound;
+        sfx.pitch = 1 - pitchRandomization + Random.Range(-pitchRandomization, pitchRandomization);
+        sfx.Play();
+
         if (currentBullet.GetComponent<CustomProjectiles>().hitTheTarget == true)
         {
             source.PlayOneShot(clip);
@@ -159,7 +170,7 @@ public class Shooting : MonoBehaviour
 
         bulletsLeft--;
         bulletsShot--;
-
+       
         if (allowInvoke)
         {
             Invoke("ResetShot", timeBetweenShooting);
@@ -180,9 +191,11 @@ public class Shooting : MonoBehaviour
         {
             spreadable2 = true;
         }
+
+        Recoil_Script.RecoilFire();
     }   
 
-    void Aiming()
+    public void Aiming()
     {
         if (Input.GetKey(KeyCode.Mouse1))
         {
@@ -191,6 +204,7 @@ public class Shooting : MonoBehaviour
             Movement.mouseSensitivity = 0.2f;
             if (spreadable)
                 spreadValue = 0;
+            aiming = true;
         }
         else
         {
@@ -198,7 +212,8 @@ public class Shooting : MonoBehaviour
             Camera.main.fieldOfView = 60.0f;
             Movement.mouseSensitivity = 0.5f;
             if (spreadable == true && spreadable2 == true) 
-                spreadValue = 1;
+                spreadValue = 0.5f;
+            aiming = false;
         }
     }
 

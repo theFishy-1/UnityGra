@@ -130,19 +130,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activated: 1
   rb: {fileID: 9097467899039579979}
-  explosion: {fileID: 924385698551278738, guid: 1f53ece739cee2a49994703e13c8b67a,
+  explosion: {fileID: 6431595653152485378, guid: 97941330cd4f21d4cbc2ff10e3e7129c,
     type: 3}
   whatIsEnemies:
     serializedVersion: 2
     m_Bits: 2048
   whatIsPlayer:
     serializedVersion: 2
-    m_Bits: 0
-  source: {fileID: 1276637618634219536, guid: 8357f3424abcb8f49833d94d099cef37, type: 3}
-  clip: {fileID: 8300000, guid: 61bc517aa4ebb264ca85cd816e4a2579, type: 3}
-  hitmarker: {fileID: 5130251957191273662, guid: 92f9120c2ab6e2b4a92f4462b5df41c2,
-    type: 3}
-  bounciness: 1
+    m_Bits: 4096
+  hitTheTarget: 0
+  rocketJumpOn: 0
+  bounciness: 0
   useGravity: 0
   damage: 100
   explosionRange: 0.5
