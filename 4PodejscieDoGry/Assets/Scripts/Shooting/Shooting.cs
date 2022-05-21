@@ -23,6 +23,7 @@ public class Shooting : MonoBehaviour
     public Recoil Recoil_Script;
     public AudioClip gunShotSound;
     public float pitchRandomization;
+    public float shotVolume;
     public AudioSource sfx;
 
 
@@ -30,7 +31,10 @@ public class Shooting : MonoBehaviour
     public float shootForce;    
     public float upwardForce;
     public float spreadValue;
+    public float minSpreadValue;
+    public float maxSpreadValue;
     public float recoilForce;
+    public float shootRange;
 
     [Header("Weapon Timing")]
     public float reloadTime;
@@ -68,6 +72,7 @@ public class Shooting : MonoBehaviour
 
     public void Start() 
     {      
+
         Recoil_Script = transform.Find("cameraRecoil").GetComponent<Recoil>();
     }
 
@@ -131,7 +136,7 @@ public class Shooting : MonoBehaviour
         }
         else
         {
-            targetPoint = ray.GetPoint(100);
+            targetPoint = ray.GetPoint(shootRange);
         }
 
 
@@ -155,8 +160,10 @@ public class Shooting : MonoBehaviour
         if (currentBullet.GetComponent<CustomProjectiles>()) currentBullet.GetComponent<CustomProjectiles>().activated = true;
 
         //Sound
+        sfx.Stop();
         sfx.clip = gunShotSound;
         sfx.pitch = 1 - pitchRandomization + Random.Range(-pitchRandomization, pitchRandomization);
+        sfx.volume = shotVolume;
         sfx.Play();
 
         if (currentBullet.GetComponent<CustomProjectiles>().hitTheTarget == true)
@@ -203,7 +210,7 @@ public class Shooting : MonoBehaviour
             Camera.main.fieldOfView = 30.0f;
             Movement.mouseSensitivity = 0.2f;
             if (spreadable)
-                spreadValue = 0;
+                spreadValue = minSpreadValue;
             aiming = true;
         }
         else
@@ -212,7 +219,7 @@ public class Shooting : MonoBehaviour
             Camera.main.fieldOfView = 60.0f;
             Movement.mouseSensitivity = 0.5f;
             if (spreadable == true && spreadable2 == true) 
-                spreadValue = 0.5f;
+                spreadValue = maxSpreadValue;
             aiming = false;
         }
     }

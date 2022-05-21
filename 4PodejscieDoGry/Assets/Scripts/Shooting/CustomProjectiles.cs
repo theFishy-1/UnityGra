@@ -6,6 +6,8 @@ public class CustomProjectiles : MonoBehaviour
 {
     public bool activated;
 
+    public bool isEnemyScript;
+
     [Header("Please attatch components:")]
     public Rigidbody rb;
     public GameObject explosion;
@@ -242,7 +244,10 @@ public class CustomProjectiles : MonoBehaviour
         {
             //Damage enemies
             if (enemies[i].GetComponent<Destroy>())
-                enemies[i].GetComponent<Destroy>().TakeDamage(damage);                
+                enemies[i].GetComponent<Destroy>().TakeDamage(damage);      
+
+            if (enemies[i].GetComponent<DestroyPlayer>())
+                enemies[i].GetComponent<DestroyPlayer>().TakeDamage(damage);           
 
             //Add explosion force to enemies
             if (enemies[i].GetComponent<Rigidbody>())
@@ -326,9 +331,12 @@ public class CustomProjectiles : MonoBehaviour
         if (objectToTp != null && tpOnEveryCollision) Pearl(transform.position);
 
         //Explode on touch
-        
-        if (explodeOnTouch && collision.collider.CompareTag("Enemy") && !collision.collider.CompareTag("Bullet")) Explode();
-
+        if (isEnemyScript == false) {
+            if (explodeOnTouch && collision.collider.CompareTag("Enemy") && !collision.collider.CompareTag("Bullet")) Explode();
+        }
+        else if (isEnemyScript == true) {
+            if (explodeOnTouch && collision.collider.CompareTag("Player") && !collision.collider.CompareTag("Bullet")) Explode();
+        }
         if (explosion != null)
             Instantiate(explosion, transform.position, Quaternion.identity);            
 

@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Destroy : MonoBehaviour
 {
     public float health = 60f;
-
 
     public void TakeDamage(int damage)
     {

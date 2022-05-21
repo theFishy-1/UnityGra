@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6203757251028109179}
   - component: {fileID: 6109955164041801063}
   - component: {fileID: 6110069643731203673}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Embers
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4814,9 +4814,9 @@ GameObject:
   - component: {fileID: 6109720164971278159}
   - component: {fileID: 6110712865109455837}
   - component: {fileID: 5896601640357274049}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: BigExplosion
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9750,9 +9750,9 @@ GameObject:
   - component: {fileID: 6199097628807697445}
   - component: {fileID: 6109902935387478253}
   - component: {fileID: 6111029027817358301}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: SmokeTrail
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14574,9 +14574,9 @@ GameObject:
   - component: {fileID: 6198650467933531357}
   - component: {fileID: 6109933033357517451}
   - component: {fileID: 6110321311028869837}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Embers (1)
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19375,9 +19375,9 @@ GameObject:
   - component: {fileID: 6203867550878121949}
   - component: {fileID: 6109718305154800893}
   - component: {fileID: 6110595934155171289}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Light
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24257,9 +24257,9 @@ GameObject:
   - component: {fileID: 6204184625279738611}
   - component: {fileID: 6104582060387052385}
   - component: {fileID: 6110355617810468781}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Debris
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29140,9 +29140,9 @@ GameObject:
   - component: {fileID: 6203970942734310281}
   - component: {fileID: 6109310017265798973}
   - component: {fileID: 6110078277032243873}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Shockwave
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34022,9 +34022,9 @@ GameObject:
   - component: {fileID: 6204142469601934501}
   - component: {fileID: 6109469869189472919}
   - component: {fileID: 6110528002526595915}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: AdditonalSmoke
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

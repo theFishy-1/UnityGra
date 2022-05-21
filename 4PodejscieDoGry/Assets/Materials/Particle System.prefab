@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6535787017860370288}
   - component: {fileID: 1228325918669502935}
   - component: {fileID: 466519194337472972}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Particle System
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

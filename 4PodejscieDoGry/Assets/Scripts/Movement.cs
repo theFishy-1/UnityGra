@@ -11,18 +11,16 @@ public class Movement : MonoBehaviour
     float speedMulti = 8;
     float speedDiv = 4;
     public float click = 2;
-
     [Header("Mouse Look Variables")]
     public static float mouseSensitivity = 0.5f;
     float cameraPitch = 0.0f;
     [SerializeField] bool lockCursor = true;
     public bool jumping = false;
-
     [Header("Private Variables")]
     [SerializeField] Transform playerCameraLook = null;
     private CharacterController cc;
     public Vector3 moveDirection = Vector3.zero;
-    private bool groundedPlayer;
+    public bool groundedPlayer;
     public void Start() {
         cc = GetComponent<CharacterController>();
         if (lockCursor)
@@ -37,10 +35,8 @@ public class Movement : MonoBehaviour
     }
     public void UpdateMouseLook() {
         Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-
         cameraPitch -= mouseDelta.y * mouseSensitivity;
-        cameraPitch = Mathf.Clamp(cameraPitch, -90.0f, 90.0f);
-        
+        cameraPitch = Mathf.Clamp(cameraPitch, -90.0f, 90.0f);    
         playerCameraLook.localEulerAngles = Vector3.right * cameraPitch;
         transform.Rotate(Vector3.up * mouseDelta.x * mouseSensitivity);
     }
@@ -78,6 +74,5 @@ public class Movement : MonoBehaviour
         }
         cc.Move(moveDirection * Time.deltaTime);
         jumping = false;
-        Debug.Log(moveDirection);
     }   
 }
