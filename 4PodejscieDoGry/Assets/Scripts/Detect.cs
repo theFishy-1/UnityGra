@@ -8,8 +8,12 @@ public class Detect : MonoBehaviour
     GameObject target;
     public Transform enemy;
     public GameObject bullet;
-    public Transform shootPoint;
-    public Transform shootPoint2;
+    public Transform shootPoint; //barell 1
+    public Transform shootPoint2; // barell 2
+    public GameObject cube1; //turret
+    public GameObject cube2; // place to move to
+    public GameObject cube3; // place to go back to
+    public float speed;
 
 
     public float shootSpeed = 10f;
@@ -18,11 +22,27 @@ public class Detect : MonoBehaviour
 
     private void Start() {
         originalTime = timeToShoot;
+        
+    }
+
+    //Moving the turret from under the ground
+    IEnumerator MoveAtoB(GameObject gameObjectA, GameObject gameObjectB, float speedTranslation)
+    {
+        while(gameObjectA.transform.position!= gameObjectB.transform.position)
+        {
+            gameObjectA.transform.position = Vector3.MoveTowards(gameObjectA.transform.position, gameObjectB.transform.position, speedTranslation * Time.deltaTime);
+            yield return null;
+        }
     }
 
     private void Update() {
         if (detected){
             enemy.LookAt(target.transform);
+            
+            StartCoroutine(MoveAtoB(cube1, cube2, speed));
+        }
+        else if (!detected) {
+            StartCoroutine(MoveAtoB(cube1, cube3, speed));
         }
     }
 

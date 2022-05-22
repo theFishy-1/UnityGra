@@ -144,7 +144,7 @@ MonoBehaviour:
   rocketJumpOn: 1
   bounciness: 0
   useGravity: 0
-  damage: 60
+  damage: 100
   explosionRange: 6
   explosionForce: 1200
   jumpSpeed: 0

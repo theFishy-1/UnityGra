@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activated: 1
+  isEnemyScript: 0
   rb: {fileID: 6504524065503526730}
   explosion: {fileID: 6431595653152485378, guid: 97941330cd4f21d4cbc2ff10e3e7129c,
     type: 3}
@@ -142,7 +143,7 @@ MonoBehaviour:
   rocketJumpOn: 0
   bounciness: 0
   useGravity: 0
-  damage: 60
+  damage: 30
   explosionRange: 0.4
   explosionForce: 0
   jumpSpeed: 0
